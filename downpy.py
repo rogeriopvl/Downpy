@@ -2,6 +2,8 @@
 """
 DownPy.py
 
+Copyright 2008 Rogerio Vicente
+
 This script downloads a given HTML file and parses all links in it,
 to download every file linked.
 
