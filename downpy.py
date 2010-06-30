@@ -58,7 +58,7 @@ def main():
 		parser.error("missing web page url")
 	
 	if options.extension:
-		print "...."
+		print "TODO"
 		
 	print "Downloading page in %s" % args[0]
 	links = parsePage(args[0])
