@@ -1,6 +1,6 @@
 #!/usr/local/env python
 """
-DownPy.py
+downpy.py
 
 Copyright 2008 Rogerio Vicente
 
@@ -41,13 +41,12 @@ def download(furl, folder):
 
 def parseFilename(link):
 	pieces = link.split('/')
-	
 	return pieces[len(pieces)-1].replace("%20", " ")
 
 def main():
 	"""main method: its too big... think about it"""
 	
-	# default extensions, these should become something like constants
+	# some filetypes are incomplete but this should do it for now
 	audioExtensions = ['.mp3', '.ogg', '.mp4a', '.wma', '.aac']
 	videoExtensions = ['.avi', '.mp4', '.wmv', '.flv']
 	docExtensions = ['.doc', '.docx', '.txt', '.rtf', '.pdf', '.epub', '.chm']
