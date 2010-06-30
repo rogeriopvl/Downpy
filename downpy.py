@@ -85,7 +85,7 @@ def main():
 	
 	# create a directory to place the files
 	# the directory contains a timestamp to avoid conflicts
-	folderName = "downpy-%d" % int(time.time())
+	folderName = "download_%d" % int(time.time())
 	os.mkdir(folderName)
 	
 	print "Downloading page in %s" % args[0]
