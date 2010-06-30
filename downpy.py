@@ -10,12 +10,11 @@ to download every file linked.
 This script was made to be used along with Filebuster <http://rogeriopvl.com/filebuster>
 """
 import urllib2
+import os
 from optparse import OptionParser
 
-def parsePage(url):
-
-	audio_extensions = ['.mp3', '.ogg', '.mp4a', '.wma', '.aac']
-	
+def parsePage(url, extensions):
+		
 	from BeautifulSoup import BeautifulSoup as soup
 	
 	links = []
@@ -23,7 +22,8 @@ def parsePage(url):
 	
 	for tag in content.findAll('a', {'href': True}):
 		link = tag.attrMap['href']
-		if True in [link.endswith(ex) for ex in audio_extensions]:
+		# gotta love this
+		if True in [link.endswith(ex) for ex in extensions]:
 			links.append(link)
 		
 	return links
@@ -45,23 +45,45 @@ def parseFilename(link):
 	return pieces[len(pieces)-1].replace("%20", " ")
 
 def main():
-	"""main method"""
+	"""main method: its too big... think about it"""
+	
+	# default extensions, these should become something like constants
+	audioExtensions = ['.mp3', '.ogg', '.mp4a', '.wma', '.aac']
+	videoExtensions = ['.avi', '.mp4', '.wmv', '.flv']
+	docExtensions = ['.doc', '.docx', '.txt', '.rtf', '.pdf', '.epub', '.chm']
+	
+	# lets build the command line parser
 	usage = "usage: %prog [options] url"
 	version = "Downpy v1.0"
 	parser = OptionParser(usage, version=version)
 	
 	parser.add_option("-e", "--extension", help="Choose specific file extension. Only files with this extension will be downloaded.")
+	parser.add_option("-f", "--filetype", help="Choose a type of files to download: audio, video, doc.")
 	
 	(options, args) = parser.parse_args()
 	
+	# default extensions
+	extensions = audioExtensions
+	
+	# define the behavior according to the passed arguments
 	if (len(args) != 1):
 		parser.error("missing web page url")
 	
 	if options.extension:
-		print "TODO"
-		
+		extensions = [options.extension]
+	elif options.filetype:
+		if options.filetype == "audio":
+			extensions = audioExtensions
+		elif options.filetype == "video":
+			extensions = videoExtensions
+		elif options.filetype == "doc":
+			extensions = docExtensions
+		else:
+			parser.error("Error: wrong filetype")
+	
+	# let the action begin	
 	print "Downloading page in %s" % args[0]
-	links = parsePage(args[0])
+	links = parsePage(args[0], extensions)
 	print "Done!"
 	
 	print "Page contains %d downloadable links." % len(links)
