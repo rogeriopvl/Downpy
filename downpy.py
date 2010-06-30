@@ -10,7 +10,7 @@ to download every file linked.
 This script was made to be used along with Filebuster <http://rogeriopvl.com/filebuster>
 """
 import urllib2
-import os
+import os, time
 from optparse import OptionParser
 
 def parsePage(url, extensions):
@@ -28,10 +28,10 @@ def parsePage(url, extensions):
 		
 	return links
 	
-def download(furl):
+def download(furl, folder):
 	try:
 		res = urllib2.urlopen(furl)
-		f = open(parseFilename(furl), "wb")
+		f = open(folder+"/"+parseFilename(furl), "wb")
 		for line in res:
 			f.write(line)
 		f.close()
@@ -81,7 +81,13 @@ def main():
 		else:
 			parser.error("Error: wrong filetype")
 	
-	# let the action begin	
+	# let the action begin
+	
+	# create a directory to place the files
+	# the directory contains a timestamp to avoid conflicts
+	folderName = "downpy-%d" % int(time.time())
+	os.mkdir(folderName)
+	
 	print "Downloading page in %s" % args[0]
 	links = parsePage(args[0], extensions)
 	print "Done!"
@@ -90,7 +96,7 @@ def main():
 	
 	for link in links:
 		print "Downloading %s" % link
-		download(args[0]+"/"+link)
+		download(args[0]+"/"+link, folderName)
 	
 	print "Downpy terminated."
 
