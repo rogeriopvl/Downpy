@@ -69,7 +69,7 @@ def main():
 		parser.error("missing web page url")
 	
 	if options.extension:
-		extensions = [options.extension]
+		extensions = ['.'+options.extension]
 	elif options.filetype:
 		if options.filetype == "audio":
 			extensions = audioExtensions
