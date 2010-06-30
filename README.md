@@ -6,7 +6,7 @@ Downpy is a tool written in python that downloads every file contained in a give
 
 ## Usage
 
-	python downpy.py <url>
+	python downpy.py [options] <url>
 
 ## Roadmap
 
