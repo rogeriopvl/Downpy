@@ -10,8 +10,9 @@ to download every file linked.
 This script was made to be used along with Filebuster <http://rogeriopvl.com/filebuster>
 """
 import urllib2
+from optparse import OptionParser
 
-def parse_page(url):
+def parsePage(url):
 
 	audio_extensions = ['.mp3', '.ogg', '.mp4a', '.wma', '.aac']
 	
@@ -28,45 +29,48 @@ def parse_page(url):
 	return links
 	
 def download(furl):
-	res = urllib2.urlopen(furl)
-	f = open(parse_filename(furl), "wb")
-	for line in res:
-		f.write(line)
-	f.close()
+	try:
+		res = urllib2.urlopen(furl)
+		f = open(parseFilename(furl), "wb")
+		for line in res:
+			f.write(line)
+		f.close()
+	except:
+		print "Error: invalid url"
+		exit()
 
-def parse_filename(link):
+def parseFilename(link):
 	pieces = link.split('/')
 	
 	return pieces[len(pieces)-1].replace("%20", " ")
 
-def display_help():
-	print "Options:"
-	print "-e: Let's you choose the file extension. Only files with this extension will be downloaded."
+def main():
+	"""main method"""
+	usage = "usage: %prog [options] url"
+	version = "Downpy v1.0"
+	parser = OptionParser(usage, version=version)
+	
+	parser.add_option("-e", "--extension", help="Choose specific file extension. Only files with this extension will be downloaded.")
+	
+	(options, args) = parser.parse_args()
+	
+	if (len(args) != 1):
+		parser.error("missing web page url")
+	
+	if options.extension:
+		print "...."
+		
+	print "Downloading page in %s" % args[0]
+	links = parsePage(args[0])
+	print "Done!"
+	
+	print "Page contains %d downloadable links." % len(links)
+	
+	for link in links:
+		print "Downloading %s" % link
+		download(args[0]+"/"+link)
+	
+	print "Downpy terminated."
 
 if __name__ == "__main__":
-	
-	import sys
-	
-	if len(sys.argv) != 2 and len(sys.argv) != 4:
-		print "Usage: %s <website_url> [-e <file_extension>]" % sys.argv[0]
-		print "Use -h for more info."
-	elif len(sys.argv) == 2:
-		if sys.argv[1] == "-h":
-			display_help()
-		else:
-			print "Downloading index page in %s" % sys.argv[1]
-			links = parse_page(sys.argv[1])
-			print "Done!"
-		
-			print "index page contains %d downloadable links!" % len(links)
-		
-			for link in links:
-					print "Downloading %s" % link
-					download(sys.argv[1]+"/"+link)
-		
-			print "DownPy terminated!"
-	elif len(sys.argv) == 4:
-		print "TODO: specified file extension"
-	else:
-		print "nothing"
-			
+	main()
