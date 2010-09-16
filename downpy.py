@@ -58,6 +58,7 @@ def main():
 	
 	parser.add_option("-e", "--extension", help="Choose specific file extension. Only files with this extension will be downloaded.")
 	parser.add_option("-f", "--filetype", help="Choose a type of files to download: audio, video, doc.")
+	parser.add_option("-o", "--output", help="Choose the destination folder of your (soon) downloaded files")
 	
 	(options, args) = parser.parse_args()
 	
@@ -81,7 +82,14 @@ def main():
 			parser.error("Error: wrong filetype")
 	
 	# let the action begin
-	
+
+	# point to the output options' dir
+	if options.output:
+		try:
+			os.chdir(options.output)
+		except OSError:
+			print "Output directory doesn't exist! Saving downloads to current directory."
+
 	# create a directory to place the files
 	# the directory contains a timestamp to avoid conflicts
 	folderName = "download_%d" % int(time.time())
