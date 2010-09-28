@@ -47,9 +47,9 @@ def main():
 	"""main method: its too big... think about it"""
 	
 	# some filetypes are incomplete but this should do it for now
-	audioExtensions = ['.mp3', '.ogg', '.mp4a', '.wma', '.aac']
-	videoExtensions = ['.avi', '.mp4', '.wmv', '.flv']
-	docExtensions = ['.doc', '.docx', '.txt', '.rtf', '.pdf', '.epub', '.chm']
+	audioExtensions = ['.mp3', '.oga', '.ogg', '.mp4a', '.wma', '.aac', '.mid']
+	videoExtensions = ['.avi', '.flv', '.mp4', '.mkv', '.ogv', '.wmv']
+	docExtensions = ['.chm', '.doc', '.docx', '.epub', '.mobi', '.odf', '.pdf', '.rtf', '.txt']
 	
 	# lets build the command line parser
 	usage = "usage: %prog [options] url"
