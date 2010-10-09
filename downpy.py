@@ -20,13 +20,19 @@ def parsePage(url, extensions):
 	
 	links = []
 	content = soup(urllib2.urlopen(url).read())
-	
+
 	for tag in content.findAll('a', {'href': True}):
-		link = tag.attrMap['href']
+		link = tag['href']
 		# gotta love this
 		if True in [link.endswith(ex) for ex in extensions]:
 			links.append(link)
-		
+
+	for tag in content.findAll(attrs={'src': True}):
+		link = tag['src']
+		print link
+		print extensions
+		if True in [link.endswith(ex) for ex in extensions]:
+			links.append(link)
 	return links
 	
 def download(furl, folder):
