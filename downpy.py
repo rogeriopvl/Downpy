@@ -48,7 +48,7 @@ def main():
 	
 	# some filetypes are incomplete but this should do it for now
 	audioExtensions = ['.mp3', '.oga', '.ogg', '.mp4a', '.wma', '.aac', '.mid']
-	videoExtensions = ['.avi', '.flv', '.mp4', '.mkv', '.ogv', '.wmv']
+	videoExtensions = ['.avi', '.flv', '.mp4', '.mkv', '.ogv', '.webm', '.wmv']
 	docExtensions = ['.chm', '.doc', '.docx', '.epub', '.mobi', '.odf', '.pdf', '.rtf', '.txt']
 	
 	# lets build the command line parser
