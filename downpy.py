@@ -13,6 +13,7 @@ import urllib2
 import os, time
 import re
 from optparse import OptionParser
+from urlparse import urljoin
 
 def parsePage(url, extensions):
 		
@@ -111,7 +112,7 @@ def main():
 	
 	for link in links:
 		if not re.match('https?://.*',link):
-			link = args[0] +'/'+ link
+			link = urljoin(args[0], link)
 		print "Downloading %s" % link
 		download(link, folderName)
 	
