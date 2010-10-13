@@ -11,6 +11,7 @@ Downpy is a tool written in python that downloads every specified filetype or fi
 ### Options
 * -e / --extension - specifies only one file extension (without the dot) to download
 * -f / --filetype - scecifies a filetype (audio, video, doc)
+* -o / --output - specifies an output directory
 
 If you don't pass any options to downpy it will run with `-f audio` by default.
 
@@ -33,6 +34,10 @@ Download all ogg files in a web page:
 Download all video files in a web page:
 
 	python downpy.py -f video http://example.com/
+
+Download all doc files and save it on the ~/Documents folder
+
+	python downpy.py -e doc -o ~/Documents/ http://example.com/
 
 ## Roadmap
 
