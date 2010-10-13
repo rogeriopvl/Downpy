@@ -11,6 +11,7 @@ This script was made to be used along with Filebuster <http://rogeriopvl.com/fil
 """
 import urllib2
 import os, time
+import re
 from optparse import OptionParser
 
 def parsePage(url, extensions):
@@ -19,13 +20,19 @@ def parsePage(url, extensions):
 	
 	links = []
 	content = soup(urllib2.urlopen(url).read())
-	
+
 	for tag in content.findAll('a', {'href': True}):
-		link = tag.attrMap['href']
+		link = tag['href']
 		# gotta love this
 		if True in [link.endswith(ex) for ex in extensions]:
 			links.append(link)
-		
+
+	for tag in content.findAll(attrs={'src': True}):
+		link = tag['src']
+		print link
+		print extensions
+		if True in [link.endswith(ex) for ex in extensions]:
+			links.append(link)
 	return links
 	
 def download(furl, folder):
@@ -40,8 +47,11 @@ def download(furl, folder):
 		exit()
 
 def parseFilename(link):
-	pieces = link.split('/')
-	return pieces[len(pieces)-1].replace("%20", " ")
+	try:
+		pieces = link.split('/')
+		return pieces[len(pieces)-1].replace("%20", " ")
+	except:
+		print "Error: parsing error for ["+ link +"]"
 
 def main():
 	"""main method: its too big... think about it"""
@@ -102,8 +112,10 @@ def main():
 	print "Page contains %d downloadable links." % len(links)
 	
 	for link in links:
+		if not re.match('https?://.*',link):
+			link = args[0] +'/'+ link
 		print "Downloading %s" % link
-		download(args[0]+"/"+link, folderName)
+		download(link, folderName)
 	
 	print "Downpy terminated."
 
