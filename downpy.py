@@ -29,8 +29,6 @@ def parsePage(url, extensions):
 
 	for tag in content.findAll(attrs={'src': True}):
 		link = tag['src']
-		print link
-		print extensions
 		if True in [link.endswith(ex) for ex in extensions]:
 			links.append(link)
 	return links
