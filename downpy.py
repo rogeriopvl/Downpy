@@ -98,17 +98,18 @@ def main():
 			os.chdir(options.output)
 		except OSError:
 			print "Output directory doesn't exist! Saving downloads to current directory."
-
-	# create a directory to place the files
-	# the directory contains a timestamp to avoid conflicts
-	folderName = "download_%d" % int(time.time())
-	os.mkdir(folderName)
 	
 	print "Downloading page in %s" % args[0]
 	links = parsePage(args[0], extensions)
 	print "Done!"
 	
 	print "Page contains %d downloadable links." % len(links)
+
+	# if there are links to download, create a folder
+	if len(links) > 0:
+		# the directory contains a timestamp to avoid conflicts
+		folderName = "download_%d" % int(time.time())
+		os.mkdir(folderName)
 	
 	for link in links:
 		if not re.match('https?://.*',link):
