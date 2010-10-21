@@ -3,7 +3,7 @@
 import sys
 from optparse import OptionParser
 
-def main(args=sys.args):
+def main(args=sys.argv):
 	
 	# lets build the command line parser
 	usage = "usage: %prog [options] url"
