@@ -22,14 +22,14 @@ def main(args=sys.argv):
 		cmdParser.error("missing web page url")
 	
 	if options.extension:
-		extensions = ['.'+options.extension]
+		ftypes = ['.'+options.extension]
 	elif options.filetype:
 		if options.filetype == "audio":
-			extensions = extensions.audio
+			ftypes = extensions.audio
 		elif options.filetype == "video":
-			extensions = extensions.video
+			ftypes = extensions.video
 		elif options.filetype == "doc":
-			extensions = extensions.doc
+			ftypes = extensions.doc
 		else:
 			cmdParser.error("Error: wrong filetype")
 
@@ -41,7 +41,7 @@ def main(args=sys.argv):
 			print "Output directory doesn't exist! Saving downloads to current directory."
 	
 	print "Downloading page in %s" % args[0]
-	links = parser.parsePage(args[0], extensions)
+	links = parser.parsePage(args[0], ftypes)
 	print "Done!"
 	
 	print "Page contains %d downloadable links." % len(links)
