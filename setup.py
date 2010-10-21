@@ -26,12 +26,28 @@ else:
 	)
 
 setup (
-	name = "Downpy",
-	platforms = 'any',
-	zip_safe = False,
-	include_package_data = True,
-	classifiers = [],
-	long_description = "",
-	cmdclass = {'build_py': build_py},
-	**add_keywords
+	name = 'Downpy',
+    version = '1.0',
+    url = 'http://github.com/rogeriopvl/Downpy',
+    license = 'BSD License',
+    author = 'Rogerio Vicente',
+    author_email = 'rogeriopvl@gmail.com',
+    description = 'Downpy is a command line tool that downloads all files of a certain media type in a webpage.',
+    long_description = '',
+    keywords = 'download files',
+    packages = find_packages(),
+    platforms = 'any',
+    zip_safe = False,
+    include_package_data = True,
+    classifiers = [
+        'License :: OSI Approved :: BSD License',
+        'Intended Audience :: Developers',
+        'Intended Audience :: End Users/Desktop',
+        'Development Status :: 4 - Beta',
+        'Programming Language :: Python :: 2',
+        'Programming Language :: Python :: 3',
+        'Operating System :: OS Independent',
+    ],
+    cmdclass = {'build_py': build_py},
+    **add_keywords
 )
