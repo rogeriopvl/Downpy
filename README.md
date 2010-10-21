@@ -4,9 +4,21 @@
 
 Downpy is a tool written in python that downloads every specified filetype or file extension contained in a given web page. This tool was built to use along with [Filebuster](http://rogeriopvl.com/filebuster).
 
+## Install
+
+For now you can install Downpy downloading the `.egg` package in the `dist/` folder. Then install the package for instance with:
+
+	easy_install Downpy-1.0-py2.6.egg
+
 ## Usage
 
-	python downpy.py [options] <url>
+If you installed the `.egg` package with `easy_install`, you should be able to run Downpy from the command line with:
+
+	down [options] <url>
+
+If you opted not to install Downpy, you can just clone the git repo and execute the `down` script:
+
+	./down [options] <url>
 
 ### Options
 * -e / --extension - specifies only one file extension (without the dot) to download
