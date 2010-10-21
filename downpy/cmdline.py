@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
-import sys, re, parser, extensions
+import sys, os, time, re
+import downloader, parser, extensions
 from optparse import OptionParser
 from urlparse import urljoin
 
@@ -55,6 +56,6 @@ def main(args=sys.argv):
 		if not re.match('https?://.*',link):
 			link = urljoin(args[0], link)
 		print "Downloading %s" % link
-		downloader.download(link, folderName)
+		downloader.downloadFile(link, folderName)
 	
 	print "Downpy terminated."
