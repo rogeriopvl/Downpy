@@ -8,7 +8,7 @@ Downpy is a tool written in python that downloads every specified filetype or fi
 
 For now you can install Downpy downloading the `.egg` package in the `dist/` folder. Then install the package for instance with:
 
-	easy_install Downpy-1.0-py2.6.egg
+	sudo easy_install Downpy-1.0-py2.6.egg
 
 ## Usage
 
