@@ -27,14 +27,6 @@ else:
 
 setup (
 	name = "Downpy",
-	packages = ["downpy"],
-	version = "1.0",
-	description =  "Downloads all files from a web page.",
-	author = "Rogerio Vicente",
-	author_email = "rogeriopvl@gmail.com"
-	url = "http://github.com/rogeriopvl/downpy",
-	download_url = "",
-	keywords = "",
 	platforms = 'any',
 	zip_safe = False,
 	include_package_data = True,
