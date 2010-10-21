@@ -1,5 +1,10 @@
 # -*- coding: utf-8 -*-
-
+'''
+File: parser.py
+Author: Rogerio Vicente <http://rogeriopvl.com>
+Description: Contains the parsing functions needed to parse the html page for links
+and the filename from the url
+'''
 import urllib2
 
 def parsePage(url, extensions):

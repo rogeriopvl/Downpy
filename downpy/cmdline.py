@@ -1,5 +1,10 @@
 # -*- coding: utf-8 -*-
-
+'''
+File: cmdline.py
+Author: Rogerio Vicente <http://rogeriopvl.com>
+Contributors: David Cruz <http://github.com/dcruz>
+Description: All the command lines interactions and output
+'''
 import sys, os, time, re
 import downloader, parser, extensions
 from optparse import OptionParser

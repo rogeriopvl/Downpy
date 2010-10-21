@@ -1,11 +1,10 @@
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
-"""
-Downpy
-
-:author: Rogério Vicente
-:license: See LICENSE file for details
-"""
-
+'''
+File: __init__.py
+Author: Rogerio Vicente <http://rogeriopvl.com>
+Description: Fires up the downpy command line
+'''
 __version__ = '1.0'
 
 import sys
