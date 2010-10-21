@@ -18,11 +18,11 @@ except ImportError:
 
 if has_setuptools:
 	add_keywords = dict(
-		entry_points = { 'console_scripts': ['downpy = downpy.cmdline:main'], }
+		entry_points = { 'console_scripts': ['down = downpy.cmdline:main'], }
 	)
 else:
 	add_keywords = dict(
-		scripts = ['downpy']
+		scripts = ['down']
 	)
 
 setup (
