@@ -9,48 +9,10 @@ to download every file linked.
 
 This script was made to be used along with Filebuster <http://rogeriopvl.com/filebuster>
 """
-import urllib2
 import os, time
 import re
 from optparse import OptionParser
 from urlparse import urljoin
-
-def parsePage(url, extensions):
-		
-	from BeautifulSoup import BeautifulSoup as soup
-	
-	links = []
-	content = soup(urllib2.urlopen(url).read())
-
-	for tag in content.findAll('a', {'href': True}):
-		link = tag['href']
-		# gotta love this
-		if True in [link.endswith(ex) for ex in extensions]:
-			links.append(link)
-
-	for tag in content.findAll(attrs={'src': True}):
-		link = tag['src']
-		if True in [link.endswith(ex) for ex in extensions]:
-			links.append(link)
-	return links
-	
-def download(furl, folder):
-	try:
-		res = urllib2.urlopen(furl)
-		f = open(folder+"/"+parseFilename(furl), "wb")
-		for line in res:
-			f.write(line)
-		f.close()
-	except:
-		print "Error: invalid url"
-		exit()
-
-def parseFilename(link):
-	try:
-		pieces = link.split('/')
-		return pieces[len(pieces)-1].replace("%20", " ")
-	except:
-		print "Error: parsing error for ["+ link +"]"
 
 def main():
 	"""main method: its too big... think about it"""
