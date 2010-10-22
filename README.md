@@ -6,13 +6,17 @@ Downpy is a tool written in python that downloads every specified filetype or fi
 
 ## Install
 
-For now you can install Downpy downloading the `.egg` package in the `dist/` folder. Then install the package for instance with:
+You can install Downpy using `pip` or `easy_install`:
+	
+	sudo pip install downpy
+or
+	sudo easy_install downpy
 
-	sudo easy_install Downpy-1.0-py2.6.egg
+An executable file will be copied to your `/usr/local/bin` folder.
 
 ## Usage
 
-If you installed the `.egg` package with `easy_install`, you should be able to run Downpy from the command line with:
+If you installed the package with `pip` or `easy_install`, you should be able to run Downpy from the command line with:
 
 	down [options] <url>
 

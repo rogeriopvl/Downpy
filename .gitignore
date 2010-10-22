@@ -3,3 +3,4 @@
 *.swp
 Downpy.egg-info/
 build/
+dist/
