@@ -7,6 +7,7 @@ Description: All the command lines interactions and output
 '''
 import sys, os, time, re
 import downloader, parser, extensions
+from downpy import __version__
 from optparse import OptionParser
 from urlparse import urljoin
 
@@ -14,7 +15,7 @@ def main(args=sys.argv):
 	
 	# lets build the command line parser
 	usage = "usage: %prog [options] url"
-	version = "Downpy v1.0"
+	version = "Downpy "+__version__
 	cmdParser = OptionParser(usage, version=version)
 
 	# default to audio files
