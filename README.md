@@ -45,20 +45,12 @@ If you wan't more extensions you can edit the code or open an issue in github pr
 ### Examples
 Download all ogg files in a web page:
 
-	python downpy.py -e ogg http://example.com/
+	down -e ogg http://example.com/
 
 Download all video files in a web page:
 
-	python downpy.py -f video http://example.com/
+	down -f video http://example.com/
 
 Download all doc files and save it on the ~/Documents folder
 
-	python downpy.py -e doc -o ~/Documents/ http://example.com/
-
-## Roadmap
-
-###To do:
-
-- Python egg package
-- Loading bar in text-mode while downloading
-- Full GUI
+	down -e doc -o ~/Documents/ http://example.com/
