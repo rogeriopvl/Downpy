@@ -16,7 +16,10 @@ def main(args=sys.argv):
 	usage = "usage: %prog [options] url"
 	version = "Downpy v1.0"
 	cmdParser = OptionParser(usage, version=version)
-	
+
+	# default to audio files
+	ftypes = extensions.audio
+
 	cmdParser.add_option("-e", "--extension", help="Choose specific file extension. Only files with this extension will be downloaded.")
 	cmdParser.add_option("-f", "--filetype", help="Choose a type of files to download: audio, video, doc.")
 	cmdParser.add_option("-o", "--output", help="Choose the destination folder for your downloaded files")
