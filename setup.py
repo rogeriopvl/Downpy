@@ -27,7 +27,7 @@ else:
 
 setup (
 	name = 'Downpy',
-    version = '1.0',
+    version = '1.0.1',
     url = 'http://github.com/rogeriopvl/Downpy',
     license = 'BSD License',
     author = 'Rogerio Vicente',

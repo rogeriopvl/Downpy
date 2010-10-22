@@ -5,14 +5,19 @@ Author: Rogerio Vicente <http://rogeriopvl.com>
 Description: Contains the parsing functions needed to parse the html page for links
 and the filename from the url
 '''
-import urllib2
+import sys, urllib2
 
 def parsePage(url, extensions):
 		
 	from beautifulsoup import BeautifulSoup as soup
 	
 	links = []
-	htmlContent = urllib2.urlopen(url).read()
+	try:
+		htmlContent = urllib2.urlopen(url).read()
+	except:
+		print "Error: can't open url"
+		sys.exit()
+	
 	content = soup.BeautifulSoup(htmlContent)
 
 	for tag in content.findAll('a', {'href': True}):
