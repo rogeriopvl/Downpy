@@ -11,10 +11,15 @@ def downloadFile(url, folder):
 	"""Dowloads files from urls"""
 	try:
 		res = urllib2.urlopen(url)
+	except:
+		print "Error: invalid url"
+		exit()
+	try:
 		f = open(folder+"/"+parser.parseFilename(url), "wb")
 		for line in res:
 			f.write(line)
 		f.close()
-	except:
-		print "Error: invalid url"
+	except IOError:
+		print "Error: error saving file"
 		exit()
+

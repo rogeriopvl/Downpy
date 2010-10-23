@@ -5,7 +5,7 @@ Author: Rogerio Vicente <http://rogeriopvl.com>
 Description: Contains the parsing functions needed to parse the html page for links
 and the filename from the url
 '''
-import sys, urllib2
+import urllib2
 
 def parsePage(url, extensions):
 		
@@ -16,7 +16,7 @@ def parsePage(url, extensions):
 		htmlContent = urllib2.urlopen(url).read()
 	except:
 		print "Error: can't open url"
-		sys.exit()
+		exit()
 	
 	content = soup.BeautifulSoup(htmlContent)
 
