@@ -15,7 +15,7 @@ def downloadFile(url, folder):
 		print "Error: invalid url"
 		exit()
 	try:
-		f = open(folder+"/"+parser.parseFilename(url), "wb")
+		f = open(folder+"/"+parser.parseFileName(url), "wb")
 		for line in res:
 			f.write(line)
 		f.close()

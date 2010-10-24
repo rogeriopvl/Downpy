@@ -8,7 +8,7 @@ and the filename from the url
 import urllib2
 
 def parsePage(url, extensions):
-		
+	"""Parses a given webpage and fetches all link sources"""
 	from beautifulsoup import BeautifulSoup as soup
 	
 	links = []
@@ -32,10 +32,17 @@ def parsePage(url, extensions):
 			links.append(link)
 	return links
 
+def parseFileName(url):
+	"""Parses the file name from a given url"""
+	pieces = url.split('/')
+	return pieces[len(pieces)-1].replace("%20", " ")
 
-def parseFilename(url):
-	try:
-		pieces = url.split('/')
-		return pieces[len(pieces)-1].replace("%20", " ")
-	except:
-		print "Error: parsing error for ["+ url +"]"
+def parseFolderName(url):
+	"""Parses the folder name from a given url"""
+	pieces = url.split('/')
+	pieces = [s for s in pieces if s] # remove all empty strings
+
+	if '.' in pieces[len(pieces)-1]:
+		return pieces[len(pieces)-2].replace("%20", "_")
+	else:
+		return pieces[len(pieces)-1].replace("%20", "_")

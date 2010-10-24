@@ -5,7 +5,7 @@ Author: Rogerio Vicente <http://rogeriopvl.com>
 Contributors: David Cruz <http://github.com/dcruz>
 Description: All the command lines interactions and output
 '''
-import sys, os, time, re
+import sys, os, re
 import downloader, parser, extensions
 from downpy import __version__
 from optparse import OptionParser
@@ -47,7 +47,7 @@ def main(args=sys.argv):
 		try:
 			os.chdir(options.output)
 		except OSError:
-			print "Output directory doesn't exist! Saving downloads to current directory."
+			print "Info: output directory doesn't exist! Saving downloads to current directory."
 	
 	print "Downloading page in %s" % args[0]
 	links = parser.parsePage(args[0], ftypes)
@@ -58,8 +58,12 @@ def main(args=sys.argv):
 	# if there are links to download, create a folder
 	if len(links) > 0:
 		# the directory contains a timestamp to avoid conflicts
-		folderName = "download_%d" % int(time.time())
-		os.mkdir(folderName)
+		folderName = parser.parseFolderName(args[0])
+
+		try:
+			os.mkdir(folderName)
+		except OSError:
+			print "Info: download folder already exists, overwriting..." 
 	
 	for link in links:
 		if not re.match('https?://.*',link):
