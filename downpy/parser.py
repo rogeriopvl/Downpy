@@ -43,6 +43,8 @@ def parseFolderName(url):
 	pieces = [s for s in pieces if s] # remove all empty strings
 
 	if '.' in pieces[len(pieces)-1]:
-		return pieces[len(pieces)-2].replace("%20", "_")
+		folderName = pieces[len(pieces)-2].replace("%20", "_")
 	else:
-		return pieces[len(pieces)-1].replace("%20", "_")
+		folderName = pieces[len(pieces)-1].replace("%20", "_")
+
+	return ':' in folderName ? pieces[len(pieces)-1] : folderName
