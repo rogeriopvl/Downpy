@@ -47,4 +47,7 @@ def parseFolderName(url):
 	else:
 		folderName = pieces[len(pieces)-1].replace("%20", "_")
 
-	return ':' in folderName ? pieces[len(pieces)-1] : folderName
+	if ':' in folderName:
+		return pieces[len(pieces)-1]
+	else:
+		return folderName
