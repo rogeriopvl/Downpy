@@ -5,11 +5,10 @@ Author: Rogerio Vicente <http://rogeriopvl.com>
 Contributors: David Cruz <http://github.com/dcruz>
 Description: All the command lines interactions and output
 '''
-import sys, os, re
-import downloader, parser, extensions
+import sys, os
+import urlqueue, downloader, parser, extensions
 from downpy import __version__
 from optparse import OptionParser
-from urlparse import urljoin
 
 def main(args=sys.argv):
 	
@@ -50,14 +49,13 @@ def main(args=sys.argv):
 			print "Info: output directory doesn't exist! Saving downloads to current directory."
 	
 	print "Downloading page in %s" % args[0]
-	links = parser.parsePage(args[0], ftypes)
+	queue = urlqueue.UrlQueue(parser.parsePage(args[0], ftypes))
 	print "Done!"
 	
-	print "Page contains %d downloadable links." % len(links)
+	print "Page contains %d downloadable links." % queue.size()
 
 	# if there are links to download, create a folder
-	if len(links) > 0:
-		# the directory contains a timestamp to avoid conflicts
+	if queue.size() > 0:
 		folderName = parser.parseFolderName(args[0])
 
 		try:
@@ -65,10 +63,11 @@ def main(args=sys.argv):
 		except OSError:
 			print "Info: download folder already exists, overwriting..." 
 	
-	for link in links:
-		if not re.match('https?://.*',link):
-			link = urljoin(args[0], link)
-		print "Downloading %s" % link
-		downloader.downloadFile(link, folderName)
+	dl = downloader.Downloader(folderName)
+
+	while queue.hasNext():
+		link = queue.next()
+		print "Downloading %s" % parser.parseFileName(link)
+		dl.download(link)
 	
 	print "Downpy terminated."

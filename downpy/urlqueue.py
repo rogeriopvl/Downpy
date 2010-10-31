@@ -2,7 +2,8 @@
 
 '''
 File: queue.py
-Author: Rogerio Vicente <httt://rogeriopvl.com>
+Author: Rogerio Vicente <http://rogeriopvl.com>
+Contributor: David Cruz <http://github.com/dcruz>
 Description: Just a wrapper of a queue and all its operations.
 A deque is being used has this data structure is more efficient when we append and pop only
 from both ends.
@@ -10,13 +11,16 @@ from both ends.
 
 from collections import deque
 
-class Queue(object):
+class UrlQueue(object):
 
-	def __init__(self):
+	def __init__(self, items=[]):
+		"""You can pass items or ignore it at your will"""
 		self.items = deque()
+		for item in items:
+			self.items.append(item)
 	
 	def add(self, url):
-		"""Adds an element to the queue"""
+		"""Adds an url to the queue. If its a relative url, the base is added"""
 		self.items.append(url)
 	
 	def next(self):
@@ -26,6 +30,12 @@ class Queue(object):
 		except IndexError:
 			return False
 	
+	def hasNext(self):
+		return len(self.items) > 0
+
+	def size(self):
+		return len(self.items)
+
 	def recover(self, serializedFile):
 		"""Opens a serialized queue object in a file and rebuilds it"""
 		try:

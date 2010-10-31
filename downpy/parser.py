@@ -5,7 +5,8 @@ Author: Rogerio Vicente <http://rogeriopvl.com>
 Description: Contains the parsing functions needed to parse the html page for links
 and the filename from the url
 '''
-import urllib2
+import urllib2, re
+from urlparse import urljoin
 
 def parsePage(url, extensions):
 	"""Parses a given webpage and fetches all link sources"""
@@ -20,16 +21,18 @@ def parsePage(url, extensions):
 	
 	content = soup.BeautifulSoup(htmlContent)
 
-	for tag in content.findAll('a', {'href': True}):
+	# get all hrefs and srcs in the page
+	results = content.findAll('a', {'href': True})
+	#results.append(content.findAll(attrs={'src': True}))
+	#print results
+	#exit()
+	for tag in results:
 		link = tag['href']
-		# gotta love this
+		# pythonic perfection ahead!
 		if True in [link.endswith(ex) for ex in extensions]:
-			links.append(link)
-
-	for tag in content.findAll(attrs={'src': True}):
-		link = tag['src']
-		if True in [link.endswith(ex) for ex in extensions]:
-			links.append(link)
+			if not re.match('https?://.*',link):
+				link = urljoin(url, link)
+			links.append(link)	
 	return links
 
 def parseFileName(url):
