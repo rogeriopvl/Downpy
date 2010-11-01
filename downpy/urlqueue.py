@@ -15,9 +15,7 @@ class UrlQueue(object):
 
 	def __init__(self, items=[]):
 		"""You can pass items or ignore it at your will"""
-		self.items = deque()
-		for item in items:
-			self.items.append(item)
+		self.items = deque(items)
 	
 	def add(self, url):
 		"""Adds an url to the queue. If its a relative url, the base is added"""

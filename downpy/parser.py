@@ -23,9 +23,8 @@ def parsePage(url, extensions):
 
 	# get all hrefs and srcs in the page
 	results = content.findAll('a', {'href': True})
-	#results.append(content.findAll(attrs={'src': True}))
-	#print results
-	#exit()
+	results.extend(content.findAll(attrs={'src': True}))
+
 	for tag in results:
 		link = tag['href']
 		# pythonic perfection ahead!
