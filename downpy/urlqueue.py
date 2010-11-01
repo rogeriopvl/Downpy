@@ -10,6 +10,7 @@ from both ends.
 '''
 
 from collections import deque
+import pickle
 
 class UrlQueue(object):
 
@@ -34,12 +35,21 @@ class UrlQueue(object):
 	def size(self):
 		return len(self.items)
 
-	def recover(self, serializedFile):
-		"""Opens a serialized queue object in a file and rebuilds it"""
+	def saveState(self, folderName):
 		try:
-			fd = open(serializedFile)
+			fd = open(folderName+'/download.dat', "w")
+			pickle.dump(self.items, fd)
+			fd.close()
+			return True
 		except:
 			return False
-
-		self.items = deque(fd)
-		return True
+	
+	def recoverState(self, folderName):
+		"""Opens a file with the download links and rebuilds the queue"""
+		try:
+			fd = open(folderName+'/download.dat', "r")
+			self.items = deque(pickle.load(fd))
+			fd.close()
+			return True
+		except:
+			return False

@@ -48,20 +48,26 @@ def main(args=sys.argv):
 		except OSError:
 			print "Info: output directory doesn't exist! Saving downloads to current directory."
 	
-	print "Downloading page in %s" % args[0]
-	queue = urlqueue.UrlQueue(parser.parsePage(args[0], ftypes))
-	print "Done!"
-	
-	print "Page contains %d downloadable links." % queue.size()
+	# get the folder name from the url
+	folderName = parser.parseFolderName(args[0])
 
-	# if there are links to download, create a folder
-	if queue.size() > 0:
-		folderName = parser.parseFolderName(args[0])
+	# check if the download folder already exists
+	if os.path.exists(folderName):
+		queue = urlqueue.UrlQueue()
+		queue.recoverState(folderName)
+	else:
+		print "Downloading page in %s" % args[0]
+		queue = urlqueue.UrlQueue(parser.parsePage(args[0], ftypes))
+		print "Done!"
+		print "Page contains %d downloadable links." % queue.size()
 
-		try:
-			os.mkdir(folderName)
-		except OSError:
-			print "Info: download folder already exists, overwriting..." 
+		# if there are links to download, create a folder
+		if queue.size() > 0:
+			try:
+				os.mkdir(folderName)
+				queue.saveState(folderName)
+			except OSError:
+				print "Info: download folder already exists, overwriting..." 
 	
 	dl = downloader.Downloader(folderName)
 
@@ -69,5 +75,6 @@ def main(args=sys.argv):
 		link = queue.next()
 		print "Downloading %s" % parser.parseFileName(link)
 		dl.download(link)
+		queue.saveState(folderName)
 	
 	print "Downpy terminated."
