@@ -64,7 +64,6 @@ def main(args=sys.argv):
 	for link in links:
 		if not re.match('https?://.*',link):
 			link = urljoin(args[0], link)
-		print "Downloading %s" % link
 		downloader.downloadFile(link, folderName)
 	
 	print "Downpy terminated."
