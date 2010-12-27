@@ -53,6 +53,7 @@ def main(args=sys.argv):
 
 	# check if the download folder already exists
 	if os.path.exists(folderName):
+		print "Found incomplete download. Resuming..."
 		queue = urlqueue.UrlQueue()
 		queue.recoverState(folderName)
 	else:
