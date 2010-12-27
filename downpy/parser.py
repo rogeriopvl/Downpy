@@ -22,11 +22,13 @@ def parsePage(url, extensions):
 	content = soup.BeautifulSoup(htmlContent)
 
 	# get all hrefs and srcs in the page
-	results = content.findAll('a', {'href': True})
-	results.extend(content.findAll(attrs={'src': True}))
+	results = []
+	for tag in content.findAll(attrs={'href': True}):
+		results.append(tag['href'])
+	for tag in content.findAll(attrs={'src': True}):
+		results.append(tag['src'])
 
-	for tag in results:
-		link = tag['href']
+	for link in results:
 		# pythonic perfection ahead!
 		if True in [link.endswith(ex) for ex in extensions]:
 			if not re.match('https?://.*',link):
