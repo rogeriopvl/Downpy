@@ -70,10 +70,8 @@ def main(args=sys.argv):
 				print "Info: download folder already exists, overwriting..." 
 	
 	dl = downloader.Downloader(folderName)
-
 	while queue.hasNext():
 		link = queue.next()
-		print "Downloading %s" % parser.parseFileName(link)
 		dl.download(link)
 		queue.saveState(folderName)
 	
