@@ -20,14 +20,21 @@ def main(args=sys.argv):
 	# default to audio files
 	ftypes = extensions.audio
 
+	# default search filter option
+	searchFilter = None
+
 	cmdParser.add_option("-e", "--extension", help="Choose specific file extension. Only files with this extension will be downloaded.")
 	cmdParser.add_option("-f", "--filetype", help="Choose a type of files to download: audio, video, doc.")
+	cmdParser.add_option("-s", "--search", help="Only download links that match contain this given string")
 	cmdParser.add_option("-o", "--output", help="Choose the destination folder for your downloaded files")
 	
 	(options, args) = cmdParser.parse_args()
 
 	if (len(args) != 1):
 		cmdParser.error("missing web page url")
+
+	if options.search:
+		searchFilter = options.search
 	
 	if options.extension:
 		ftypes = ['.'+options.extension]
@@ -39,7 +46,7 @@ def main(args=sys.argv):
 		elif options.filetype == "doc":
 			ftypes = extensions.doc
 		else:
-			cmdParser.error("Error: wrong filetype")
+			cmdParser.error("wrong filetype")
 
 	# point to the output options dir
 	if options.output:
@@ -58,7 +65,7 @@ def main(args=sys.argv):
 		queue.recoverState(folderName)
 	else:
 		print "Downloading page in %s" % args[0]
-		queue = urlqueue.UrlQueue(parser.parsePage(args[0], ftypes))
+		queue = urlqueue.UrlQueue(parser.parsePage(args[0], ftypes, searchFilter))
 		print "Done!"
 		print "Page contains %d downloadable links." % queue.size()
 

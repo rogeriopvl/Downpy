@@ -8,7 +8,7 @@ and the filename from the url
 import urllib2, re
 from urlparse import urljoin
 
-def parsePage(url, extensions):
+def parsePage(url, extensions, searchFilter=None):
 	"""Parses a given webpage and fetches all link sources"""
 	from beautifulsoup import BeautifulSoup as soup
 	
@@ -33,7 +33,8 @@ def parsePage(url, extensions):
 		if True in [link.endswith(ex) for ex in extensions]:
 			if not re.match('https?://.*',link):
 				link = urljoin(url, link)
-			links.append(link)	
+			if searchFilter == None or searchFilter in link: 
+				links.append(link)	
 	return links
 
 def parseFileName(url):
