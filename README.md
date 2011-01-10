@@ -27,6 +27,7 @@ If you opted not to install Downpy, you can just clone the git repo and execute 
 ### Options
 * -e / --extension - specifies only one file extension (without the dot) to download
 * -f / --filetype - scecifies a filetype (audio, video, doc)
+* -s / --search - downloads only links containing the given string
 * -o / --output - specifies an output directory
 
 If you don't pass any options to downpy it will run with `-f audio` by default.
